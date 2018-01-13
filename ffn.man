@@ -1,0 +1,71 @@
+.\" Process this file with
+.\" groff -man -Tascii ffn.1
+.\"
+.TH FFN 1 "2018/01/03" "User Manuals"
+.SH NAME
+ffn \- Fix File Names
+.SH SYNOPSIS
+.B ffn [options]
+.I file[s]
+.B ...
+
+.SH DESCRIPTION
+Fixes file names by removing spaces and non-alphanumber characters.
+
+By default, all characters are converted to lowercase.
+
+By default, all dots/periods are removed. If the file has an extension
+the dot between the basename and the file extension is maintained.
+Any leading dot on hidden files is not removed.
+
+Only regular files and directories will be renamed, no symlinks will be renamed.
+
+Rename Rules
+  + convert all non-whitelist characters to underscores
+      whitelist = digits (0-9), letters (a-zA-Z), underscore, dash, period/dots
+  + optionally convert uppercase to lowercase
+  + convert spaces to underscores
+  + optionally change dots to underscores, except leading one
+  + remove multiple underscores
+  + remove leading dashes
+
+If know file list is provided, names will be read from stdin. 
+
+.SH OPTIONS
+.IP "-d,  --nodots"
+leave dots in the file name
+.IP "-D,  --dirs"
+rename directories
+.IP "-l   --nolower"
+do not convert letters to lowercase
+.IP  "     --dryrun"
+dryrun (test run) do not rename files, only display name changes
+.IP   "     --verbose"
+enable verbose output
+.IP "     --version"
+display the program version number
+.IP "     --help"
+prints a short version of help
+
+.SH EXAMPLES 
+The following examples may help:
+
+ ffn *
+         rename all files in the current directory
+
+ ffn --dryrun -D -- *
+         test run for all files and directories in the current directory
+
+ find . -print | ffn --dryrun 
+         recursivey rename all files in current directory
+
+ find . -print0  | xargs -0 ffn
+        recursivey rename file (including files with newline in the name)
+
+.SH BUGS
+Fails to rename/fix capitalization of files on Samba shares
+
+.SH AUTHOR
+John Lockett <lockett@nbnet.nb.ca>
+
+

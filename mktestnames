@@ -1,0 +1,44 @@
+#!/bin/bash
+
+mkdir testnames
+ touch "testnames/simpleCapitalS"
+ touch "testnames/simpleCapitalS.txt"
+
+ touch "testnames/spaces  Caps No Ext"
+ touch "testnames/spaces  Caps  Ext.flac"
+
+ touch "testnames/many___underscore____"
+ touch "testnames/many___underscore____.awk"
+
+ touch "testnames/nonwhitelist!testnames"
+ touch "testnames/nonwhitelist+testnames.pl"
+ touch "testnames/nonwhitelist!+test=names.txt"
+
+ touch "testnames/moreunderscores-testnames"
+ touch "testnames/moreunderscores_-_testnames.1"
+ touch "testnames/moreunderscores__-_testnames.2"
+ touch "testnames/moreunderscores__-__testnames.3"
+ 
+ touch "testnames/-the_darn_dash"
+ touch "testnames/--the_darn_dash.1"
+
+ touch "testnames/many.dots.in.names"
+ touch "testnames/many.dots.in.names.1"
+ touch "testnames/many.dots.in.names.12"
+ touch "testnames/many.dots.in.names.123"
+ touch "testnames/many.dots.in.names.1234"
+ touch "testnames/many.dots.in.names.12345"
+
+ touch "testnames/unicodewo∞rk"
+ touch "testnames/unicodewor∞k.txt"
+ touch "testnames/unicodewor∞∞k∞kk.txt"
+
+
+mkdir -p testnames/dir1_with_subdir/Sub.Dir.dots
+ touch "testnames/dir1_with_subdir/Unicode wor∞∞k∞kk.txt"
+ touch "testnames/dir1_with_subdir/Sub.Dir.dots/s2Unicode wor∞∞k∞kk.txt"
+
+mkdir -p testnames/dir2_WITH_Cap_subdir/Sub.Dir.dots
+ touch "testnames/dir2_WITH_Cap_subdir/d2Unicode wor∞∞k∞kk.txt"
+ touch "testnames/dir2_WITH_Cap_subdir/d2SecondFile.txt"
+
