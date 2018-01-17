@@ -22,12 +22,17 @@ mkdir testnames
  touch "testnames/-the_darn_dash"
  touch "testnames/--the_darn_dash.1"
 
+# extension up to 7 letters for .torrent
  touch "testnames/many.dots.in.names"
  touch "testnames/many.dots.in.names.1"
  touch "testnames/many.dots.in.names.12"
  touch "testnames/many.dots.in.names.123"
  touch "testnames/many.dots.in.names.1234"
  touch "testnames/many.dots.in.names.12345"
+ touch "testnames/many.dots.in.names.123456"
+ touch "testnames/many.dots.in.names.1234567"
+ touch "testnames/many.dots.in.names.12345678"
+ touch "testnames/many.dots.in.names.123456789"
 
  touch "testnames/unicodewo∞rk"
  touch "testnames/unicodewor∞k.txt"

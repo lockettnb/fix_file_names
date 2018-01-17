@@ -28,11 +28,10 @@ all: $(SRCS) $(INCS)
 install:
 	strip ffn
 	cp ffn $(INSTALL_DIR)
-	cp mktestnames $(INSTALL_DIR)
 
 uninstall:
 	rm -f $(INSTALL_DIR)/$(BINS)
-	rm -f $(INSTALL_DIR)/$(SCRIPTS)
+#	rm -f $(INSTALL_DIR)/$(SCRIPTS)
 ifeq ($(SU), root)
 	sudo rm -f $(MANPATH)/$(MANFILE) 
 else

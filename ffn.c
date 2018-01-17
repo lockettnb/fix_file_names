@@ -227,7 +227,8 @@ void split_base_ext(char *filename, char *base, char *ext)
 
     // the filename extention pattern
     //  dot/period (.) followed by 1 to 4 letters/digits
-    strcpy(extpattern,"[.][a-zA-z0-9]{1,4}$");
+    //  update 2018/01/16: 1 to 7 letters.... for torrent files
+    strcpy(extpattern,"[.][a-zA-z0-9]{1,7}$");
 
     rc=regcomp(rg, extpattern, REG_EXTENDED); 
     if (rc !=0) {
