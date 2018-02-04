@@ -45,6 +45,8 @@
 // for basename/pathname
 #include <libgen.h>
 
+// for PATH_MAX
+#include <linux/limits.h>
 
 #define NULL_CHAR '\0'
 #define TRUE -1
@@ -53,7 +55,11 @@
 // do-while groups statements and avoid trailing semicolon problems
 #define dbprintf(fmt, ...) do { if (debug) fprintf(stderr, fmt, ##__VA_ARGS__); } while (0)
 
-#define PATHNAMEMAX 4096    // I beleive this is max pathname length in liunx
+#ifndef PATH_MAX
+#define PATH_MAX 4096
+#endif
+
+#define PATHNAMEMAX PATH_MAX  
 #define FILENAMEMAX 256     // I beleive this is max filname length in liunx
 #define FILEMAX 4096        // max number of files from stdin
 
