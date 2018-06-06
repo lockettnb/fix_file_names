@@ -12,7 +12,8 @@ ffn \- Fix File Names
 .SH DESCRIPTION
 Fixes file names by removing spaces and non-alphanumber characters.
 
-By default, all characters are converted to lowercase.
+By default, all characters are converted to lowercase. This includes converting
+any file extention to lowercase.
 
 By default, all dots/periods are removed. If the file has an extension
 the dot between the basename and the file extension is maintained.

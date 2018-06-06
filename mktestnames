@@ -34,6 +34,11 @@ mkdir testnames
  touch "testnames/many.dots.in.names.12345678"
  touch "testnames/many.dots.in.names.123456789"
 
+ touch "testnames/CAP_ext.JPG"
+ touch "testnames/CAP_ext.TORRENT"
+ touch "testnames/cap_ext2.TORRENT"
+
+
  touch "testnames/unicodewo∞rk"
  touch "testnames/unicodewor∞k.txt"
  touch "testnames/unicodewor∞∞k∞kk.txt"

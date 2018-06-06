@@ -5,6 +5,7 @@
 //    2003/08/13 finally collected together all my various program peices 
 //    2017/01/23 created, rewrite from perl (fnp) to C (ffn)
 //    2018/01/13 first release
+//    2018/03/26 changed verbose to show files that do not need name changes
 //
 // Copyright © 2018 John Lockett lockett@nbnet.nb.ca 
 // 
@@ -33,6 +34,8 @@
 #include <getopt.h>
 #include <string.h>
 #include <stdlib.h>
+
+// for regexs
 #include <regex.h>
 
 // for tolower
@@ -46,7 +49,7 @@
 #include <libgen.h>
 
 
-#define NULL_CHAR '\0'
+#define NUL '\0'
 #define TRUE -1
 #define FALSE 0
 
@@ -123,7 +126,7 @@ char *instructions[] = {
     "        : recursivey rename all files in sampledir directory",
     " ",
     "                                                     john 2017/12",
-    NULL_CHAR
+    NUL
     };
 
 
@@ -141,7 +144,7 @@ void inst(char *iptr[], int status)
             }
 
         printf("Usage: %s [OPTION]... [FILE]...\n", program_name);  
-        while (*iptr != NULL_CHAR)
+        while (*iptr != NUL)
           puts(*iptr++);
     }
 
@@ -191,7 +194,7 @@ struct stat fileStat;
 
 // reverse bubble sort the file/directory name list
 // for recursive directory lists this ensures we rename lower directories
-// before change names of higher level in the directory tree
+// before changing names of directories at a higher level 
 void bubble( int num, char *fnames[], int *slist) 
 {
  int i;
@@ -345,6 +348,7 @@ void cleanupname(char *fn)
 
 int processfile(char *infname, int ftype)
 {
+ int i;
  struct stat fileStat;
  char *filedup;
  char *pathdup;
@@ -386,6 +390,12 @@ int processfile(char *infname, int ftype)
     dbprintf(" <inNAME: %s\n",fqname_in);
 
     cleanupname(bname);
+//  this is where we should convert basename to lowercase
+    if(lower) {
+        for(i = 0; extension[i]; i++){
+          extension[i] = tolower(extension[i]);
+        } 
+    }
 
     fqname_out[0]='\0';
     strcat(fqname_out, pname);
@@ -394,17 +404,23 @@ int processfile(char *infname, int ftype)
     strcat(fqname_out, extension);
     dbprintf(" >outNAME: %s\n",fqname_out);
 
-    if(access(fqname_out, F_OK) == 0){
-        if(dryrun || verbose)   // new file name exists skip file rename
-          printf("%sFile exist skipping %s --> %s\n", (dryrun)?"Dry Run::":":", fqname_in, fqname_out);
-    } else {
-         if(dryrun){  // if dryrun print message and return
-            printf("Dry Run::Rename %s  %s %s\n",(ftype==DIRECTORY)?"Directory":"File", fqname_in, fqname_out);
-        } else {  // otherwise rename file/directory
-            if(verbose) printf(":Renaming <%s> : <%s>\n",fqname_in, fqname_out);
-            if(rename(fqname_in, fqname_out))
-                fprintf(stderr, ">>Error: Failed to rename %s to %s\n", fqname_in, fqname_out);
+    if ((strcmp(fqname_in, fqname_out) != 0)){ 
+        if(access(fqname_out, F_OK) == 0){
+            if(dryrun || verbose)   // new file name exists skip file rename
+              printf("%sFile exist skipping %s --> %s\n", (dryrun)?"Dry Run::":":", fqname_in, fqname_out);
+        } else {
+             if(dryrun){  // if dryrun print message and return
+                printf("Dry Run::Rename %s  %s %s\n",(ftype==DIRECTORY)?"Directory":"File", fqname_in, fqname_out);
+            } else {  // otherwise rename file/directory
+                if(verbose) printf(":Renaming <%s> : <%s>\n",fqname_in, fqname_out);
+                if(rename(fqname_in, fqname_out))
+                    fprintf(stderr, ">>Error: Failed to rename %s to %s\n", fqname_in, fqname_out);
+            }
         }
+    } else {
+        if (dryrun||verbose) 
+              printf("%sFilename already exceptable, skipping %s --> %s\n", (dryrun)?"Dry Run::":":", fqname_in, fqname_out);
+
     }
 
     free(filedup);
