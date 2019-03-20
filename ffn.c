@@ -396,7 +396,7 @@ int processfile(char *infname, int ftype)
     dbprintf(" <inNAME: %s\n",fqname_in);
 
     cleanupname(bname);
-//  this is where we should convert basename to lowercase
+//  this is where we convert extension to lowercase
     if(lower) {
         for(i = 0; extension[i]; i++){
           extension[i] = tolower(extension[i]);
@@ -479,15 +479,15 @@ char nextfilename[FILENAMEMAX]; // next filename when reading stdin
 
     if (help || version) inst(instructions,0);
 
-        dbprintf(">>option: dirs    %s\n", dirs?"TRUE":"FALSE");
-        dbprintf(">>option: dots    %s\n", dots?"TRUE":"FALSE");
-        dbprintf(">>option: lower   %s\n", lower?"TRUE":"FALSE");
-        dbprintf(">>option: verbose %s\n", verbose?"TRUE":"FALSE");
-        dbprintf(">>option: help    %s\n", help?"TRUE":"FALSE");
-        dbprintf(">>option: version %s\n", version?"TRUE":"FALSE");
-        dbprintf(">>option: dryrun  %s\n", dryrun?"TRUE":"FALSE");
-        if(numfiles == 0) dbprintf("no filelist... read  stdin\n"); 
-        if(argv[optind]!=NULL && strcmp(argv[optind],"-") == 0 ) dbprintf("- ... read stdin\n");
+    dbprintf(">>option: dirs    %s\n", dirs?"TRUE":"FALSE");
+    dbprintf(">>option: dots    %s\n", dots?"TRUE":"FALSE");
+    dbprintf(">>option: lower   %s\n", lower?"TRUE":"FALSE");
+    dbprintf(">>option: verbose %s\n", verbose?"TRUE":"FALSE");
+    dbprintf(">>option: help    %s\n", help?"TRUE":"FALSE");
+    dbprintf(">>option: version %s\n", version?"TRUE":"FALSE");
+    dbprintf(">>option: dryrun  %s\n", dryrun?"TRUE":"FALSE");
+    if(numfiles == 0) dbprintf("no filelist... read  stdin\n"); 
+    if(argv[optind]!=NULL && strcmp(argv[optind],"-") == 0 ) dbprintf("- ... read stdin\n");
 
 
   // if no files on command line read from stdin
@@ -516,9 +516,9 @@ char nextfilename[FILENAMEMAX]; // next filename when reading stdin
   // the order of regular files does not matter
     bubble( numfiles, filelist, sortit );
 
-        dbprintf("\n");
-        for (i=0; i<numfiles; i++) 
-            dbprintf( ">>filelist: %i %s\n", i, filelist[sortit[i]] );
+    dbprintf("\n");
+    for (i=0; i<numfiles; i++) 
+        dbprintf( ">>filelist: %i %s\n", i, filelist[sortit[i]] );
 
   // rename regular files first, before directory names change
     for (i=0; i < numfiles; i++) {
@@ -546,7 +546,7 @@ char nextfilename[FILENAMEMAX]; // next filename when reading stdin
         }
     }
 
-      free(sortit);
+  free(sortit);
 //  if we read files from stdin we should really clean up the memory
 //  we allocated but today ... we will let linux do the cleanup
 //     for(i=0; i<numfiles; i++) free(filelist[i]);
