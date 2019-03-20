@@ -24,7 +24,7 @@ Only regular files and directories will be renamed, no symlinks will be renamed.
 Rename Rules
   + convert all non-whitelist characters to underscores
       whitelist = digits (0-9), letters (a-zA-Z), underscore, dash, period/dots
-  + optionally convert uppercase to lowercase
+  + optionally convert uppercase to lowercase (this includes the file extension)
   + convert spaces to underscores
   + optionally change dots to underscores, except leading one
   + remove multiple underscores
