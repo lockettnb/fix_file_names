@@ -348,7 +348,11 @@ void cleanupname(char *fn)
 
 
   //  6 remove leading dashes
-    str_replace(fn, "^-", "");
+    if(fn[0] == '-') {
+        fn[0] = 'x";
+    } else {
+        str_replace(fn, "^-", "");
+    }
 }
 
 
