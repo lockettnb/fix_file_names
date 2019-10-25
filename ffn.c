@@ -371,7 +371,7 @@ int processfile(char *infname, int ftype)
 
   // if file does not exist do nothing
     if(stat(infname,&fileStat) < 0){
-        dbprintf(":File %s not found\n", infname);
+        dbprintf(">File %s not found\n", infname);
         return 1;
     }
 
@@ -417,19 +417,19 @@ int processfile(char *infname, int ftype)
     if ((strcmp(fqname_in, fqname_out) != 0)){ 
         if(access(fqname_out, F_OK) == 0){
             if(dryrun || verbose)   // new file name exists skip file rename
-              printf("%sFile exist skipping %s --> %s\n", (dryrun)?"Dry Run::":":", fqname_in, fqname_out);
+              printf("%sFile exist skipping %s --> %s\n", (dryrun)?">Dry Run: ":">", fqname_in, fqname_out);
         } else {
              if(dryrun){  // if dryrun print message and return
-                printf("Dry Run::Rename %s  %s %s\n",(ftype==DIRECTORY)?"Directory":"File", fqname_in, fqname_out);
+                printf(">Dry Run: Rename %s  %s %s\n",(ftype==DIRECTORY)?"Directory":"File", fqname_in, fqname_out);
             } else {  // otherwise rename file/directory
-                if(verbose) printf(":Renaming <%s> : <%s>\n",fqname_in, fqname_out);
+                if(verbose) printf(">Renaming <%s> : <%s>\n",fqname_in, fqname_out);
                 if(rename(fqname_in, fqname_out))
                     fprintf(stderr, ">>Error: Failed to rename %s to %s\n", fqname_in, fqname_out);
             }
         }
     } else {
         if (dryrun||verbose) 
-              printf("%sFilename already exceptable, skipping %s --> %s\n", (dryrun)?"Dry Run::":":", fqname_in, fqname_out);
+              printf("%sFilename exceptable, skipping %s --> %s\n", (dryrun)?">Dry Run: ":">", fqname_in, fqname_out);
 
     }
 
@@ -545,7 +545,7 @@ char nextfilename[FILENAMEMAX]; // next filename when reading stdin
             if(dirs) {
             processfile(filelist[sortit[i]], ft);
             } else {
-               if(verbose) printf(":Not Renaming Directory %s\n", filelist[sortit[i]]);
+               if(verbose) printf(">Not Renaming Directory %s\n", filelist[sortit[i]]);
             }
         }
     }
