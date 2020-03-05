@@ -266,7 +266,6 @@ void str_replace(char *target, const char *pattern, const char *replacement)
 {
  char buffer[FILENAMEMAX] = { 0 };
  char *ip = &buffer[0];
-//  char *p;
  char *tp = target;
 //  size_t pat_len = strlen(pattern);
  size_t repl_len = strlen(replacement);
@@ -316,7 +315,6 @@ void str_replace(char *target, const char *pattern, const char *replacement)
 // this is the magic to create new file names
 void cleanupname(char *fn) 
 {
-//  char pattern[32];
  int  i;
 
   //   1 convert all non-whitelist char to underscores
