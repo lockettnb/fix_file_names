@@ -1,7 +1,7 @@
 #
 # 2018/01/02 updated 
 #
-CFLAGS = -g
+CFLAGS = -g -Wall
 CC = gcc
 
 # getting fancy here testing for root permissions
