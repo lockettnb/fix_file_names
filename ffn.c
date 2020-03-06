@@ -6,7 +6,9 @@
 //    2017/01/23 created, rewrite from perl (fnp) to C (ffn)
 //    2018/01/13 first release
 //    2018/03/26 changed verbose to show files that do not need name changes
+//    2020/03/06 fixed null char to null pointer at end of instructions
 //
+
 // Copyright © 2018 John Lockett lockett@nbnet.nb.ca 
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
@@ -51,9 +53,8 @@
 // for PATH_MAX
 #include <linux/limits.h>
 
-#define NUL '\0'
-#define TRUE -1
 #define FALSE 0
+#define TRUE !FALSE 
 
 // do-while groups statements and avoid trailing semicolon problems
 #define dbprintf(fmt, ...) do { if (debug) fprintf(stderr, fmt, ##__VA_ARGS__); } while (0)
@@ -104,8 +105,6 @@ char *instructions[] = {
     " -D   --dirs      : rename directores, default is regular files only",
     " -d   --nodots    : do NOT remove dots in name, default is change dots to underscore",
     " -l   --nolower   : do NOT convert name to lower case, default is change name to lowercase",
-//     " -s c --space c    : convert spaces to char c, default is underscore",
-//     " -n c --nonwhite c : convert non-whitelist to char c, default is to remove them",
     "      --dryrun    : dryrun (test), only display name changes",
     "      --verbose   : enable verbose output",
     "      --help      : display help and exit",
@@ -132,7 +131,7 @@ char *instructions[] = {
     "        : recursivey rename all files in sampledir directory",
     " ",
     "                                                     john 2017/12",
-    NUL
+    NULL
     };
 
 
@@ -150,7 +149,7 @@ void inst(char *iptr[], int status)
             }
 
         printf("Usage: %s [OPTION]... [FILE]...\n", program_name);  
-        while (*iptr != NUL)
+        while (iptr != NULL)
           puts(*iptr++);
     }
 
@@ -267,7 +266,6 @@ void str_replace(char *target, const char *pattern, const char *replacement)
  char buffer[FILENAMEMAX] = { 0 };
  char *ip = &buffer[0];
  char *tp = target;
-//  size_t pat_len = strlen(pattern);
  size_t repl_len = strlen(replacement);
  regex_t *rg;
  regmatch_t match_buf[1];
@@ -445,8 +443,8 @@ int main (int argc, char **argv)
  int ft;                     // filetype indicator
  int numfiles;               // number of files on command line
  int *sortit;                // array used to sort filenames
-char **filelist;                // filelist to be renamed
-char nextfilename[FILENAMEMAX]; // next filename when reading stdin
+ char **filelist;                // filelist to be renamed
+ char nextfilename[FILENAMEMAX]; // next filename when reading stdin
 
     program_name=argv[0];
 
