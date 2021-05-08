@@ -36,6 +36,7 @@ Usage: ./ffn [OPTION]... [FILE]...
    
    find sampledir -print | ffn --dryrun   
         : recursivey rename all files in sampledir directory  
- 
+
+    find . -print0 | xargs -0 ffn --dryrun 
 
 
