@@ -149,7 +149,7 @@ void inst(char *iptr[], int status)
             }
 
         printf("Usage: %s [OPTION]... [FILE]...\n", program_name);  
-        while (iptr != NULL)
+        while (*iptr != NULL)
           puts(*iptr++);
     }
 
