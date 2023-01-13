@@ -51,7 +51,11 @@
 #include <libgen.h>
 
 // for PATH_MAX
+#if __FreeBSD__
+#include <limits.h>
+#else
 #include <linux/limits.h>
+#endif
 
 #define FALSE 0
 #define TRUE !FALSE 

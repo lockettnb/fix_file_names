@@ -3,7 +3,8 @@
 # 2020/03/06 changed to not make ffn everytime
 #
 CFLAGS = -g -Wall
-CC = gcc
+# changing for BSD compatibility, from CC=gcc
+CC = cc
 
 # getting fancy here testing for root permissions
 SU := $(shell sudo -n ls 1>/dev/null 2>/dev/null && echo root || echo noroot)
