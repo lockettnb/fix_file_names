@@ -9,7 +9,7 @@ CC = cc
 # getting fancy here testing for root permissions
 SU := $(shell sudo -n ls 1>/dev/null 2>/dev/null && echo root || echo noroot)
 
-INSTALL_DIR = $(HOME)/bin
+INSTALL_DIR = $(HOME)/.local/bin
 MANPATH = /usr/local/man/man1
 
 BINS	= ffn
