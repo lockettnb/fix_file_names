@@ -2,15 +2,16 @@
 //    ffn.c -- fix file names
 //
 //
-//    2003/08/13 finally collected together all my various program peices 
+//    2003/08/13 finally collected together all my various program peices
 //    2017/01/23 created, rewrite from perl (fnp) to C (ffn)
 //    2018/01/13 first release
 //    2018/03/26 changed verbose to show files that do not need name changes
 //    2020/03/06 fixed null char to null pointer at end of instructions
 //
-
-// Copyright © 2018 John Lockett lockett@nbnet.nb.ca 
-// 
+// The MIT License (MIT)
+//
+// Copyright © 2018 John Lockett lockett@nbnet.nb.ca
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy of
 // this software and associated documentation files (the "Software"), to deal in
 // the Software without restriction, including without limitation the rights to
@@ -58,7 +59,7 @@
 #endif
 
 #define FALSE 0
-#define TRUE !FALSE 
+#define TRUE !FALSE
 
 // do-while groups statements and avoid trailing semicolon problems
 #define dbprintf(fmt, ...) do { if (debug) fprintf(stderr, fmt, ##__VA_ARGS__); } while (0)
@@ -67,7 +68,7 @@
 #define PATH_MAX 4096
 #endif
 
-#define PATHNAMEMAX PATH_MAX  
+#define PATHNAMEMAX PATH_MAX
 #define FILENAMEMAX 256     // I beleive this is max filname length in liunx
 #define FILEMAX 4096        // max number of files from stdin
 
